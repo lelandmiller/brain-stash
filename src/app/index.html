@@ -6,8 +6,12 @@
     <title>Note Pro</title>
 
     <link type="text/css" href="assets/main.css" rel="stylesheet">
-    <script src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
+
     <script src="scripts/controller.js"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -36,18 +40,29 @@
 
 
     <div id="wrapper">
-        <div id="top-menu">NotePro</div>
+        <div id="top-menu">
+          NotePro
+          <button ng-click="saveFile()">Save</button>
+        </div>
         <div id="nav-bar">
           <ul>
             <li ng-repeat="item in items" ng-include="'tree_renderer.html'"></li>
           </ul>
         </div>
-        <div id="editor"></div>
-        <div id="preview"></div>
+        <div id="editor" ng-model="content" ui-ace="{
+          useWrapMode : true,
+          showGutter: true,
+          theme:'twilight',
+          mode: 'markdown',
+          onLoad: aceLoaded,
+          onChange: aceChanged
+        }"></div>
+      <div id="preview" ng-bind-html="preview"></div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+    
     <script>
+        /*
         var marked = require('marked');
 
         var preview = document.getElementById('preview');
@@ -63,13 +78,13 @@
          // enable livereload
         console.log('Loading gaze...');
         var Gaze = require('gaze').Gaze;
-        var gaze = new Gaze('**/*');
+        var gaze = new Gaze('** /*');
 
         gaze.on('all', function(event, filepath) {
             console.log('Change detected.');
             if (location)
                 location.reload();
-        });
+        });*/
     </script>
 </body>
 

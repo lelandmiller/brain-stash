@@ -1,0 +1,25 @@
+{
+  "name": "myWiki",
+  "version": "0.0.0",
+  "authors": [
+    "Leland Miller <lelandmiller@gmail.com>"
+  ],
+  "description": "A personal wiki software written using node-webkit.",
+  "main": "index.html",
+  "keywords": [
+    "wiki",
+    "notetaking"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-ace": "bower"
+  }
+}

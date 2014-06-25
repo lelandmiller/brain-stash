@@ -37,6 +37,8 @@
   height: 32px;
   background-color: grey;
   color: white; }
+  #top-menu button {
+    display: inline-block; }
 
 body {
   padding: 0;
