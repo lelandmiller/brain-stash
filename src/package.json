@@ -1,0 +1,11 @@
+{
+  "name": "NotePro",
+  "main": "app/index.html",
+  "window": {
+    "toolbar": true
+  },
+  "dependencies": {
+    "marked": "^0.3.2",
+    "gaze": "^0.6.4"
+  }
+}
