@@ -23,7 +23,9 @@
     </script>
 
   <script type="text/ng-template" id="tree_renderer.html">
-    {{item.title}}
+    <span ng-click="loadFile(item.fullpath)">
+      {{item.title}}
+    </span>
     <ul>
       <li ng-repeat="item in item.children" ng-include="'tree_renderer.html'"></li>
     </ul>

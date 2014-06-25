@@ -15,10 +15,11 @@ function getFileTree(path) {
         i,
         currentFile;
     for (i = 0; i < files.length; i++) {
-        currentFile = {
-            title: files[i]
-        };
         var fullPath = path + '/' + files[i];
+        currentFile = {
+            title: files[i],
+            fullpath: fullPath
+        };
         if (fs.statSync(fullPath).isDirectory()) {
             currentFile.children = getFileTree(fullPath);
         }
