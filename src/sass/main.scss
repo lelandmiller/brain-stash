@@ -1,17 +1,23 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
-@import "bitters/bitters";
+//@import "bitters/bitters";
 
+#nav-bar {
+  position: absolute;
+  width: 20%;
+  top: 32px;
+  bottom: 0;
+  left: 0;
+}
 
 #wrapper {
   width: 100%;
 }
 
 #editor {
-  width: 50%;
+  width: 40%;
   position: absolute;
-  right: 0;
-  left: 0;
+  left: 20%;
   top: 32px;
   bottom: 0;
 }
@@ -19,7 +25,7 @@
 #preview {
   position: absolute;
   right: 0;
-  width: 50%;
+  width: 40%;
   top: 32px;
   bottom: 0;
   overflow: scroll;

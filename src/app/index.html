@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html ng-app="myWiki" lang="en">
 
 <head>
     <title>Note Pro</title>
 
     <link type="text/css" href="assets/main.css" rel="stylesheet">
-
+    <script src="lib/angular.min.js"></script>
+    <script src="scripts/controller.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -21,18 +22,28 @@
         });
     </script>
 
+  <script type="text/ng-template" id="tree_renderer.html">
+    {{item.title}}
+    <ul>
+      <li ng-repeat="item in item.children" ng-include="'tree_renderer.html'"></li>
+    </ul>
+  </script>
 </head>
 
-<body>
-    <div id="wrapper">
-        <div id="top-menu">NotePro
+<body ng-controller="mainController">
 
+
+    <div id="wrapper">
+        <div id="top-menu">NotePro</div>
+        <div id="nav-bar">
+          <ul>
+            <li ng-repeat="item in items" ng-include="'tree_renderer.html'"></li>
+          </ul>
         </div>
         <div id="editor"></div>
         <div id="preview"></div>
     </div>
 
-    <script src="lib/markdown.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
     <script>
         var marked = require('marked');
@@ -43,11 +54,9 @@
         editor.getSession().setMode("ace/mode/markdown");
 
         editor.getSession().on('change', function(e) {
-            //console.log(markdown.toHTML(editor.getValue()));
             preview.innerHTML = marked(editor.getValue());
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
         });
-
 
          // enable livereload
         console.log('Loading gaze...');
