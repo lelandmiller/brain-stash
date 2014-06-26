@@ -6,6 +6,7 @@
     <title>Note Pro</title>
 
     <link type="text/css" href="assets/main.css" rel="stylesheet">
+    <script src="scripts/core.js"></script>
     <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
@@ -27,7 +28,7 @@
     </script>
 
   <script type="text/ng-template" id="tree_renderer.html">
-    <span ng-click="loadFile(item.fullpath)">
+    <span ng-click="loadFile(item)">
       {{item.title}}
     </span>
     <ul>
@@ -60,32 +61,6 @@
       <div id="preview" ng-bind-html="preview"></div>
     </div>
 
-    
-    <script>
-        /*
-        var marked = require('marked');
-
-        var preview = document.getElementById('preview');
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/markdown");
-
-        editor.getSession().on('change', function(e) {
-            preview.innerHTML = marked(editor.getValue());
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
-        });
-
-         // enable livereload
-        console.log('Loading gaze...');
-        var Gaze = require('gaze').Gaze;
-        var gaze = new Gaze('** /*');
-
-        gaze.on('all', function(event, filepath) {
-            console.log('Change detected.');
-            if (location)
-                location.reload();
-        });*/
-    </script>
 </body>
 
 </html>

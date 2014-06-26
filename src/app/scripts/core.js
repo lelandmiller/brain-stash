@@ -1,37 +1,61 @@
 var fs = require('fs');
-rootDir = '/Users/lelandmiller/note-test';
-/* { title:
- *   children: [{}]
- *   }
- *
- *
- */
+var path = require('path');
+var underscore = require('underscore');
 
-// TODO path.join instead
-function getFileTree(path) {
-    if (!path) path = rootDir;
-    var ret = [],
-        files = fs.readdirSync(path),
-        i,
-        currentFile;
-    for (i = 0; i < files.length; i++) {
-        var fullPath = path + '/' + files[i];
-        currentFile = {
-            title: files[i],
-            fullpath: fullPath
-        };
+var myWikiCore = (function() {
+    my = {};
+    rootDir = '/Users/lelandmiller/note-test';
+    /* { title:
+     *   path
+     *   children: [{}]
+     *   }
+     *
+     *
+     */
+
+    function makeEntryObject(fullPath) {
+        var ext = path.extname(fullPath),
+            title = path.basename(fullPath, ext),
+            children = null,
+            ret = {
+                title: title,
+                path: path.dirname(fullPath)
+            };
+
         if (fs.statSync(fullPath).isDirectory()) {
-            currentFile.children = getFileTree(fullPath);
+            ret.children = my.getFileTree(fullPath);
+            return ret;
+        } else if (ext === '.md') {
+            return ret;
         }
-        ret.push(currentFile);
+
+        return null;
     }
-    return ret;
-}
 
-function loadProject(path) {
-    rootDir = path;
-}
+    my.getFileTree = function (currPath) {
+        if (!currPath) currPath = rootDir;
+        var ret = [],
+            files = fs.readdirSync(currPath),
+            i,
+            currentFile;
+        for (i = 0; i < files.length; i++) {
+            var newEntry = makeEntryObject(path.join(currPath, files[i])),
+                existing = underscore.findWhere(ret, {
+                    title: newEntry.title
+                });
 
-module.exports.loadProject = loadProject;
+            if (existing) {
+                existing.children = existing.children || newEntry.children;
+            } else {
+                ret.push(newEntry);
+            }
+        }
+        return ret;
+    };
 
-module.exports.getFileTree = getFileTree;
+    my.loadProject = function (currPath) {
+        rootDir = currPath;
+    };
+
+    return my;
+})();

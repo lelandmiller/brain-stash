@@ -1,10 +1,9 @@
-var core = require('./scripts/core.js');
 var marked = require('marked');
 var fs = require('fs');
 
 var myWiki = angular.module('myWiki', ['ui.ace']);
 
-var files = core.getFileTree();
+var files = myWikiCore.getFileTree();
 
 console.log(files);
 
@@ -15,12 +14,16 @@ function mainController($scope, $http, $sce) {
     $scope.content = "# Welcome";
     $scope.preview = "";
 
-    $scope.loadFile = function (filename) {
-        $scope.currentFilename = filename;
-        $scope.content = fs.readFileSync(filename, {
-            encoding: 'utf8'
-        });
-        console.log(filename);
+    $scope.loadFile = function (entryObject) {
+        var filepath = path.join(entryObject.path, entryObject.title + '.md'),
+            content = "";
+        $scope.currentFilename = filepath;
+        if (fs.existsSync(filepath)) {
+            content = fs.readFileSync(filepath, {
+                encoding: 'utf8'
+            });
+        }
+        $scope.content = content;
     };
 
     $scope.aceChanged = function (e) {
