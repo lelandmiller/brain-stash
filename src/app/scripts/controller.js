@@ -5,13 +5,15 @@ var fs = require('fs');
 var myWikiApp = angular.module('myWiki', ['ui.ace']);
 var files = myWikiCore.getFileTree();
 
+myWikiCore.loadProject('/Users/lelandmiller/note-test');
 console.log(files);
 
 myWikiApp.controller('mainController', ['$scope', '$http', '$sce',
     function($scope, $http, $sce) {
-        $scope.items = files;
+        $scope.items = myWikiCore.getFileTree();
         $scope.currentFilename = "";
         $scope.content = "";
+
 
         $scope.loadFile = function(entryObject) {
             var filepath = path.join(entryObject.path, entryObject.title + '.md'),
@@ -55,7 +57,8 @@ myWikiApp.directive('myFileLink', function() {
     return function($scope, $element, $attrs) {
         // Create an empty menu
         var menu = new gui.Menu();
-
+            fileElement = $parse($attrs.myFileLink);
+        console.log(fileElement);
         // Add some items
         menu.append(new gui.MenuItem({ label: 'New Child Node' }));
         menu.append(new gui.MenuItem({ label: 'New Sibling Node' }));
@@ -63,6 +66,7 @@ myWikiApp.directive('myFileLink', function() {
         menu.append(new gui.MenuItem({ label: 'Delete Node' }));
         
         menu.items[0].click = function () {
+            var title = prompt('Node Title', 'New Node');
             console.log('new child');
         };
         menu.items[1].click = function () {
@@ -71,8 +75,7 @@ myWikiApp.directive('myFileLink', function() {
         menu.items[3].click = function () {
             console.log('delete node');
         };
-//        document.body.addEventListener('contextmenu', function(ev) { 
-        //$element.addEventListener('contextmenu', function(ev) { 
+
         $element.bind('contextmenu', function(ev) { 
             ev.preventDefault();
             menu.popup(ev.x, ev.y);

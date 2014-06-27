@@ -1,18 +1,21 @@
+    /* { title:
+     *   path
+     *   children: [{}]
+     *   real: 
+     *   active:
+     *   }
+     */
 var fs = require('fs');
 var path = require('path');
 var underscore = require('underscore');
 
 var myWikiCore = (function() {
-    my = {};
-    rootDir = '/Users/lelandmiller/note-test';
-    /* { title:
-     *   path
-     *   children: [{}]
-     *   }
-     *
-     *
-     */
+    var my = {},
+        rootDir = '',
+        currentEntry = null,
+        fileTree = null;
 
+    // Used for building initial path tree
     function makeEntryObject(fullPath) {
         var ext = path.extname(fullPath),
             title = path.basename(fullPath, ext),
@@ -23,7 +26,7 @@ var myWikiCore = (function() {
             };
 
         if (fs.statSync(fullPath).isDirectory()) {
-            ret.children = my.getFileTree(fullPath);
+            ret.children = buildFileTree(fullPath);
             return ret;
         } else if (ext === '.md') {
             return ret;
@@ -31,9 +34,7 @@ var myWikiCore = (function() {
 
         return null;
     }
-
-    my.getFileTree = function (currPath) {
-        if (!currPath) currPath = rootDir;
+    function buildFileTree(currPath) {
         var ret = [],
             files = fs.readdirSync(currPath),
             i,
@@ -51,10 +52,17 @@ var myWikiCore = (function() {
             }
         }
         return ret;
+    }
+
+
+
+    my.getFileTree = function () {
+        return fileTree;
     };
 
-    my.loadProject = function (currPath) {
-        rootDir = currPath;
+    my.loadProject = function (projectPath) {
+        rootDir = projectPath;
+        fileTree = buildFileTree(rootDir); 
     };
 
     return my;

@@ -6,14 +6,15 @@
     <title>Note Pro</title>
 
     <link type="text/css" href="assets/main.css" rel="stylesheet">
+
     <script src="scripts/core.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
 
     <script src="scripts/controller.js"></script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
     <script type="text/x-mathjax-config">
@@ -28,7 +29,7 @@
     </script>
 
   <script type="text/ng-template" id="tree_renderer.html">
-    <span my-file-link ng-click="loadFile(item)">
+    <span my-file-link="item" ng-click="loadFile(item)">
       {{item.title}}
     </span>
     <ul>
