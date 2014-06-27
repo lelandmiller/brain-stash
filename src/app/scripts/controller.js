@@ -52,30 +52,31 @@ myWikiApp.directive("myPreview", function() {
     };
 
 });
+
+function generateFileElementMenu() {
+    var menu = new gui.Menu();
+    menu.append(new gui.MenuItem({ label: 'New Child Node' }));
+    menu.append(new gui.MenuItem({ label: 'New Sibling Node' }));
+    menu.append(new gui.MenuItem({ type: 'separator' }));
+    menu.append(new gui.MenuItem({ label: 'Delete Node' }));
+
+    menu.items[0].click = function () {
+        var title = prompt('Node Title', 'New Node');
+        console.log('new child');
+    };
+    menu.items[1].click = function () {
+        console.log('new sibling');
+    };
+    menu.items[3].click = function () {
+        console.log('delete node');
+    };
+    return menu;
+}
+
 // Uses the node-webkit native api for the dropdown
 myWikiApp.directive('myFileLink', function() {
     return function($scope, $element, $attrs) {
-        // Create an empty menu
-        var menu = new gui.Menu();
-            fileElement = $parse($attrs.myFileLink);
-        console.log(fileElement);
-        // Add some items
-        menu.append(new gui.MenuItem({ label: 'New Child Node' }));
-        menu.append(new gui.MenuItem({ label: 'New Sibling Node' }));
-        menu.append(new gui.MenuItem({ type: 'separator' }));
-        menu.append(new gui.MenuItem({ label: 'Delete Node' }));
-        
-        menu.items[0].click = function () {
-            var title = prompt('Node Title', 'New Node');
-            console.log('new child');
-        };
-        menu.items[1].click = function () {
-            console.log('new sibling');
-        };
-        menu.items[3].click = function () {
-            console.log('delete node');
-        };
-
+        var menu = generateFileElementMenu(); 
         $element.bind('contextmenu', function(ev) { 
             ev.preventDefault();
             menu.popup(ev.x, ev.y);
