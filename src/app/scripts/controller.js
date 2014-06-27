@@ -1,3 +1,5 @@
+// Load native UI library
+var gui = require('nw.gui');
 var marked = require('marked');
 var fs = require('fs');
 var myWikiApp = angular.module('myWiki', ['ui.ace']);
@@ -47,4 +49,26 @@ myWikiApp.directive("myPreview", function() {
         });
     };
 
+});
+// Uses the node-webkit native api for the dropdown
+myWikiApp.directive('myFileLink', function() {
+    return function($scope, $element, $attrs) {
+        // Create an empty menu
+        var menu = new gui.Menu();
+
+        // Add some items
+        menu.append(new gui.MenuItem({ label: 'Item A' }));
+        menu.append(new gui.MenuItem({ label: 'Item B' }));
+        menu.append(new gui.MenuItem({ type: 'separator' }));
+        menu.append(new gui.MenuItem({ label: 'Item C' }));
+
+//        document.body.addEventListener('contextmenu', function(ev) { 
+        //$element.addEventListener('contextmenu', function(ev) { 
+        $element.bind('contextmenu', function(ev) { 
+            ev.preventDefault();
+            menu.popup(ev.x, ev.y);
+            return false;
+        });
+
+    };
 });
