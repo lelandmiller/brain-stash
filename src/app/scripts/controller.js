@@ -57,11 +57,20 @@ myWikiApp.directive('myFileLink', function() {
         var menu = new gui.Menu();
 
         // Add some items
-        menu.append(new gui.MenuItem({ label: 'Item A' }));
-        menu.append(new gui.MenuItem({ label: 'Item B' }));
+        menu.append(new gui.MenuItem({ label: 'New Child Node' }));
+        menu.append(new gui.MenuItem({ label: 'New Sibling Node' }));
         menu.append(new gui.MenuItem({ type: 'separator' }));
-        menu.append(new gui.MenuItem({ label: 'Item C' }));
-
+        menu.append(new gui.MenuItem({ label: 'Delete Node' }));
+        
+        menu.items[0].click = function () {
+            console.log('new child');
+        };
+        menu.items[1].click = function () {
+            console.log('new sibling');
+        };
+        menu.items[3].click = function () {
+            console.log('delete node');
+        };
 //        document.body.addEventListener('contextmenu', function(ev) { 
         //$element.addEventListener('contextmenu', function(ev) { 
         $element.bind('contextmenu', function(ev) { 
