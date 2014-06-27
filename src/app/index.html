@@ -13,6 +13,12 @@
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
 
+    <script type="text/javascript" src="bower_components/angular-tree-control/angular-tree-control.js"></script>
+    <!-- link for CSS when using the tree as a Dom element -->
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-tree-control/css/tree-control.css">
+    <!-- link for CSS when using the tree as an attribute -->
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-tree-control/css/tree-control-attribute.css">
+
     <script src="scripts/controller.js"></script>
 
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -47,8 +53,16 @@
           <button ng-click="saveFile()">Save</button>
         </div>
         <div id="nav-bar">
+          <treecontrol class="tree-classic"
+            tree-model="fileTree"
+            options="treeOptions"
+            on-selection="loadFile(node)" >
+            <span my-file-link="node">
+              {{node.title}} 
+            </span>
+          </treecontrol>
           <ul>
-            <li ng-repeat="item in items" ng-include="'tree_renderer.html'"></li>
+            <li ng-repeat="item in fileTree" ng-include="'tree_renderer.html'"></li>
           </ul>
         </div>
         <div id="editor" ng-model="content" ui-ace="{

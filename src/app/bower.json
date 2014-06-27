@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-ui-ace": "bower"
+    "angular-ui-ace": "bower",
+    "angular-tree-control": "~0.2.2"
   }
 }

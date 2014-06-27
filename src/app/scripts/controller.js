@@ -2,7 +2,7 @@
 var gui = require('nw.gui');
 var marked = require('marked');
 var fs = require('fs');
-var myWikiApp = angular.module('myWiki', ['ui.ace']);
+var myWikiApp = angular.module('myWiki', ['ui.ace', 'treeControl']);
 var files = myWikiCore.getFileTree();
 
 myWikiCore.loadProject('/Users/lelandmiller/note-test');
@@ -10,9 +10,12 @@ console.log(files);
 
 myWikiApp.controller('mainController', ['$scope', '$http', '$sce',
     function($scope, $http, $sce) {
-        $scope.items = myWikiCore.getFileTree();
+        $scope.fileTree = { tree: myWikiCore.buildFileTree();
         $scope.currentFilename = "";
         $scope.content = "";
+        $scope.setFileTree = function(newTree) {
+            $scope.fileTree = newTree;
+        };
 
 
         $scope.loadFile = function(entryObject) {
@@ -25,6 +28,21 @@ myWikiApp.controller('mainController', ['$scope', '$http', '$sce',
                 });
             }
             $scope.content = content;
+        };
+
+        $scope.treeOptions = {
+            nodeChildren: "children",
+            dirSelectable: true,
+            injectClasses: {
+                ul: "a1",
+                li: "a2",
+                liSelected: "a7",
+                iExpanded: "a3",
+                iCollapsed: "a4",
+                iLeaf: "a5",
+                label: "a6",
+                labelSelected: "a8"
+            }
         };
 
         /*
@@ -50,24 +68,42 @@ myWikiApp.directive("myPreview", function() {
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, $element[0]]);
         });
     };
-
 });
 
-function generateFileElementMenu() {
-    var menu = new gui.Menu();
-    menu.append(new gui.MenuItem({ label: 'New Child Node' }));
-    menu.append(new gui.MenuItem({ label: 'New Sibling Node' }));
-    menu.append(new gui.MenuItem({ type: 'separator' }));
-    menu.append(new gui.MenuItem({ label: 'Delete Node' }));
 
-    menu.items[0].click = function () {
-        var title = prompt('Node Title', 'New Node');
+
+function generateFileElementMenu(fileElement, updateCallback) {
+    var menu = new gui.Menu();
+    menu.append(new gui.MenuItem({
+        label: 'New Child Node'
+    }));
+    menu.append(new gui.MenuItem({
+        label: 'New Sibling Node'
+    }));
+    menu.append(new gui.MenuItem({
+        type: 'separator'
+    }));
+    menu.append(new gui.MenuItem({
+        label: 'Delete Node'
+    }));
+
+    menu.items[0].click = function() {
+        // New Child Node
+        myWikiCore.createChildNode(fileElement);
+        if (updateCallback) {
+            updateCallback();
+        }
         console.log('new child');
     };
-    menu.items[1].click = function () {
+    menu.items[1].click = function() {
+        myWikiCore.createSiblingNode(fileElement);
+        // New Sibling Node
+        if (updateCallback) {
+            updateCallback();
+        }
         console.log('new sibling');
     };
-    menu.items[3].click = function () {
+    menu.items[3].click = function() {
         console.log('delete node');
     };
     return menu;
@@ -75,13 +111,23 @@ function generateFileElementMenu() {
 
 // Uses the node-webkit native api for the dropdown
 myWikiApp.directive('myFileLink', function() {
-    return function($scope, $element, $attrs) {
-        var menu = generateFileElementMenu(); 
-        $element.bind('contextmenu', function(ev) { 
-            ev.preventDefault();
-            menu.popup(ev.x, ev.y);
-            return false;
-        });
+    return {
+        scope: {
+            fileElement: '=myFileLink',
+        },
+
+        link: function($scope, $element, $attrs) {
+            var menu = generateFileElementMenu($scope.fileElement, function() {
+                $scope.setFileTree(myWikiCore.buildFileTree());
+            });
+            //$scope.test = 901928093;
+            $element.bind('contextmenu', function(ev) {
+                //console.log($scope.fileElement);
+                ev.preventDefault();
+                menu.popup(ev.x, ev.y);
+                return false;
+            });
+        }
 
     };
 });
