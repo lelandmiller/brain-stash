@@ -134,11 +134,10 @@ myWikiApp.directive('myFileLink', function() {
             var menu = generateFileElementMenu($scope.fileElement, function() {
                 setFileTree(myWikiCore.buildFileTree());
             });
-            //$scope.test = 901928093;
+
             $element.bind('contextmenu', function(ev) {
-                //console.log($scope.fileElement);
                 ev.preventDefault();
-                menu.popup(ev.x, ev.y);
+                menu.popup(ev.clientX, ev.clientY);
                 return false;
             });
         }
