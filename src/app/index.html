@@ -33,7 +33,7 @@
             }
         });
     </script>
-
+<!--
   <script type="text/ng-template" id="tree_renderer.html">
     <span my-file-link="item" ng-click="loadFile(item)">
       {{item.title}}
@@ -42,6 +42,7 @@
       <li ng-repeat="item in item.children" ng-include="'tree_renderer.html'"></li>
     </ul>
   </script>
+  -->
 </head>
 
 <body ng-controller="mainController">
@@ -62,9 +63,11 @@
               {{node.title}} 
             </span>
           </treecontrol>
+          <!--
           <ul>
             <li ng-repeat="item in fileTree" ng-include="'tree_renderer.html'"></li>
           </ul>
+          -->
         </div>
         <div id="editor" ng-model="content" ui-ace="{
           useWrapMode : true,
