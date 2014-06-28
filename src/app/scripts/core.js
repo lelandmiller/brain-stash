@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = require('path');
 var underscore = require('underscore');
 
+
 var myWikiCore = (function() {
     var my = {},
         rootDir = '',
@@ -36,7 +37,7 @@ var myWikiCore = (function() {
     my.createChildNode = function(fileElement) {
         var title = prompt('Node Title', 'New Node'),
             newPath = path.join(fileElement.path, fileElement.title);
-            filePath = path.join(newPath, title + '.md');
+        filePath = path.join(newPath, title + '.md');
 
         if (!title || fs.existsSync(filePath)) return;
         // Check if directory exists
@@ -48,8 +49,8 @@ var myWikiCore = (function() {
                 alert('Cannot create required folder, file exists with name.');
             }
         } else {
-            if (fs.existsSync(fileElement.path) && 
-                    fs.statSync(fileElement.path).isDirectory()) {
+            if (fs.existsSync(fileElement.path) &&
+                fs.statSync(fileElement.path).isDirectory()) {
                 // Safe to build new dir
                 fs.mkdirSync(newPath);
                 fs.writeFileSync(filePath, '');
@@ -109,7 +110,7 @@ var myWikiCore = (function() {
         rootDir = projectPath;
         fileTree = buildFileTree(rootDir);
     };
-    my.buildFileTree = function () {
+    my.buildFileTree = function() {
         return buildFileTree(rootDir);
     };
 

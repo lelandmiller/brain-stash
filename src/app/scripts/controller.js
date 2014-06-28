@@ -19,6 +19,7 @@ myWikiApp.controller('mainController', ['$scope', '$http', '$sce',
             for (var i = 0; i < newTree.length; i++) {
                 $scope.fileTree.push(newTree[i]);
             }
+            $scope.$apply();
         };
         setFileTree = $scope.setFileTree;
 
@@ -73,7 +74,16 @@ myWikiApp.directive("myPreview", function() {
         });
     };
 });
-
+myWikiApp.directive("myProjectSelector", function() {
+    return function($scope, $element, $attrs) {
+        $element.change(function(evt) {
+            var pathname = $element.val();
+            console.log($element.val());
+            myWikiCore.loadProject(pathname);
+            setFileTree(myWikiCore.buildFileTree());
+        });
+    };
+});
 
 
 function generateFileElementMenu(fileElement, updateCallback) {
@@ -123,7 +133,6 @@ myWikiApp.directive('myFileLink', function() {
         link: function($scope, $element, $attrs) {
             var menu = generateFileElementMenu($scope.fileElement, function() {
                 setFileTree(myWikiCore.buildFileTree());
-                $scope.$apply();
             });
             //$scope.test = 901928093;
             $element.bind('contextmenu', function(ev) {
