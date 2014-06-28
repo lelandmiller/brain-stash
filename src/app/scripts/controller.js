@@ -7,16 +7,20 @@ var files = myWikiCore.getFileTree();
 
 myWikiCore.loadProject('/Users/lelandmiller/note-test');
 console.log(files);
+var setFileTree;
 
 myWikiApp.controller('mainController', ['$scope', '$http', '$sce',
     function($scope, $http, $sce) {
-        $scope.fileTree = { tree: myWikiCore.buildFileTree();
+        $scope.fileTree = myWikiCore.buildFileTree();
         $scope.currentFilename = "";
         $scope.content = "";
         $scope.setFileTree = function(newTree) {
-            $scope.fileTree = newTree;
+            $scope.fileTree.length = 0;
+            for (var i = 0; i < newTree.length; i++) {
+                $scope.fileTree.push(newTree[i]);
+            }
         };
-
+        setFileTree = $scope.setFileTree;
 
         $scope.loadFile = function(entryObject) {
             var filepath = path.join(entryObject.path, entryObject.title + '.md'),
@@ -118,7 +122,8 @@ myWikiApp.directive('myFileLink', function() {
 
         link: function($scope, $element, $attrs) {
             var menu = generateFileElementMenu($scope.fileElement, function() {
-                $scope.setFileTree(myWikiCore.buildFileTree());
+                setFileTree(myWikiCore.buildFileTree());
+                $scope.$apply();
             });
             //$scope.test = 901928093;
             $element.bind('contextmenu', function(ev) {
