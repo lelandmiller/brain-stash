@@ -1,6 +1,7 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
 //@import "bitters/bitters";
+@import 'partials/typography';
 
 #nav-bar {
   position: absolute;
@@ -23,6 +24,7 @@
 }
 
 #preview {
+  @extend %type-system-slab;
   position: absolute;
   right: 0;
   width: 40%;

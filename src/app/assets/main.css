@@ -1,7 +1,101 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300");
+@import url("http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700");
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
+
+#preview {
+  *zoom: 1;
+  text-align: left;
+  /*.type {*/
+  /*border-bottom: 1px solid;*/
+  /*display: inline-block;*/
+  /*font-family: $sans-serif;*/
+  /*font-size: .7em;*/
+  /*font-weight: 600;*/
+  /*margin-bottom: 2em;*/
+  /*padding: .1em 0;*/
+  /*text-align: left;*/
+  /*text-transform: uppercase;*/
+  /*}*/
+  /*code {*/
+  /*white-space: nowrap;*/
+  /*background: #F7F7F7;*/
+  /*border: 1px solid #E0E0E0;*/
+  /*[>border-radius: $base-border-radius * 1.5;<]*/
+  /*padding: .1em .4em;*/
+  /*font-size: .8em;*/
+  /*font-style: normal;*/
+  /*}*/ }
+  #preview:before, #preview:after {
+    content: " ";
+    display: table; }
+  #preview:after {
+    clear: both; }
+  #preview ul, #preview ol {
+    font-family: "Roboto Slab", serif;
+    font-weight: 300;
+    letter-spacing: 1;
+    margin-bottom: 1.5em; }
+  #preview h1 {
+    font-family: "Roboto Slab", serif;
+    font-size: 1.6em;
+    font-weight: 400;
+    margin-bottom: .6em;
+    /*@include media($medium-screen) {*/
+    /*font-size: 2.4em;*/
+    /*}*/ }
+  #preview h2 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.1em;
+    font-weight: 400;
+    line-height: 1.5em;
+    margin-bottom: 1.2em;
+    /*@include media($medium-screen) {*/
+    /*font-size: 1.3em;*/
+    /*}*/ }
+  #preview h3 {
+    font-family: "Roboto Slab", serif;
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.4em;
+    margin-bottom: .5em; }
+  #preview p.date {
+    /*color: transparentize($base-font-color, .6);*/
+    font-family: "Roboto Slab", serif;
+    font-size: .8em;
+    margin-bottom: .5em; }
+  #preview p {
+    font-family: "Roboto Slab", serif;
+    font-weight: 300;
+    letter-spacing: 1;
+    margin-bottom: 1.5em;
+    /*span {*/
+    /*font-family: $sans-serif;*/
+    /*font-weight: 600;*/
+    /*font-size: .8em;*/
+    /*text-transform: uppercase;*/
+    /*}*/ }
+  #preview a.read-more {
+    display: inline-block;
+    font-family: "Roboto Slab", serif;
+    font-weight: 700;
+    font-size: .8em;
+    text-transform: uppercase;
+    margin-left: .2em;
+    position: relative;
+    /*span {*/
+    /*position: absolute;*/
+    /*font-size: 1.8em;*/
+    /*top: -2px;*/
+    /*right: -12px;*/
+    /*}*/ }
+  #preview hr {
+    width: 3em; }
+  #preview p.author {
+    font-family: "Roboto Slab", serif; }
 
 #nav-bar {
   position: absolute;
