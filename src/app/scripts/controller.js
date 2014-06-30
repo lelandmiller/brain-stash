@@ -71,6 +71,7 @@ myWikiApp.directive("myPreview", function() {
             $element.html(marked($scope[$attrs.myPreview]));
             console.log('watch done');
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, $element[0]]);
+            Prism.highlightAll();
         });
     };
 });
