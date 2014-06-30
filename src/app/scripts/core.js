@@ -71,9 +71,8 @@ var myWikiCore = (function() {
         if (fs.existsSync(fullPath)) {
             alert('Node already exists.');
         } else {
-            if (fs.existsSync(fileElement.path) && fs.statSync(fileElement.path.isDirectory())) {
-                makeFile(title, fileElement.path);
-                fs.writeFileSync(fullPath);
+            if (fs.existsSync(fileElement.path) && fs.statSync(fileElement.path).isDirectory()) {
+                fs.writeFileSync(fullPath, '');
             } else {
                 alert('Error creating node.');
             }
@@ -133,8 +132,9 @@ var myWikiCore = (function() {
             i,
             currentFile;
         for (i = 0; i < files.length; i++) {
-            var newEntry = makeEntryObject(path.join(currPath, files[i])),
-                existing = underscore.findWhere(ret, {
+            var newEntry = makeEntryObject(path.join(currPath, files[i]));
+            if (!newEntry) continue;
+            var existing = underscore.findWhere(ret, {
                     title: newEntry.title
                 });
 
