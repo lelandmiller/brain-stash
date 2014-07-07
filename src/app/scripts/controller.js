@@ -1,6 +1,6 @@
 // Load native UI library
 var gui = require('nw.gui');
-var marked = require('marked');
+var markdown = require('./scripts/markdown');
 var fs = require('fs');
 var myWikiApp = angular.module('myWiki', ['ui.ace', 'treeControl']);
 var files = myWikiCore.getFileTree();
@@ -68,10 +68,16 @@ myWikiApp.directive("myPreview", function() {
     return function($scope, $element, $attrs) {
         //console.log('test:' + $attrs.myPreview);
         $scope.$watch($attrs.myPreview, function(value) {
-            $element.html(marked($scope[$attrs.myPreview]));
-            console.log('watch done');
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, $element[0]]);
-            Prism.highlightAll();
+            //$element.html(markdown.convert($scope[$attrs.myPreview]));
+            //console.log('watch done');
+            //MathJax.Hub.Queue(["Typeset", MathJax.Hub, $element[0]]);
+            //Prism.highlightAll();
+            markdown.convert($scope[$attrs.myPreview], function (err, content) {
+                if (err) throw err;
+                $element.html(content);
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, $element[0]]);
+                //Prism.highlightAll();
+            });
         });
     };
 });
