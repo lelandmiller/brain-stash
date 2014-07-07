@@ -1,6 +1,6 @@
 {
   "name": "brain-stash",
-  "main": "app/index.html",
+  "main": "index.html",
   "window": {
     "toolbar": true
   },
