@@ -2,7 +2,8 @@
   "name": "brain-stash",
   "main": "index.html",
   "window": {
-    "toolbar": true
+    "toolbar": true,
+    "title": "Brain Stash"
   },
   "dependencies": {
     "marked": "^0.3.2",
