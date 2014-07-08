@@ -1,0 +1,24 @@
+{
+  "name": "brain-stash",
+  "version": "0.0.1",
+  "description": "An information management system similar to a wiki.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lelandmiller/brain-stash.git"
+  },
+  "keywords": [
+    "wiki",
+    "notetaking",
+    "documentation"
+  ],
+  "author": "Leland Miller",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/lelandmiller/brain-stash/issues"
+  },
+  "homepage": "https://github.com/lelandmiller/brain-stash"
+}
