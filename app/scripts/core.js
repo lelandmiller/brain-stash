@@ -84,6 +84,7 @@ var myWikiCore = (function() {
             i,
             currentFile;
         for (i = 0; i < files.length; i++) {
+            if (files[i].charAt(0) === '.' || files[i] === '_site_gen') continue;
             var newEntry = makeEntryObject(path.join(currPath, files[i]));
             if (!newEntry) continue;
             var existing = underscore.findWhere(ret, {
