@@ -5,7 +5,6 @@
 
 
 var marked = require('marked');
-var graphviz = require('graphviz');
 var process = require('child_process');
 
 var renderer = new marked.Renderer();

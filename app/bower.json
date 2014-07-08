@@ -1,6 +1,6 @@
 {
-  "name": "myWiki",
-  "version": "0.0.0",
+  "name": "Brain Stash",
+  "version": "0.0.1",
   "authors": [
     "Leland Miller <lelandmiller@gmail.com>"
   ],
@@ -10,7 +10,7 @@
     "wiki",
     "notetaking"
   ],
-  "license": "MIT",
+  "license": "GPLv3",
   "private": true,
   "ignore": [
     "**/.*",

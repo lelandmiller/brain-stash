@@ -4,7 +4,8 @@
   "description": "An information management system similar to a wiki.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "nodewebkit app"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/lelandmiller/brain-stash/issues"
   },
-  "homepage": "https://github.com/lelandmiller/brain-stash"
+  "homepage": "https://github.com/lelandmiller/brain-stash",
+  "dependencies": {
+    "nodewebkit": "^0.9.2-7"
+  }
 }
