@@ -1,0 +1,6 @@
+function generateBrainStashSite() {
+myWikiCore.getFileTree();
+
+
+
+}
