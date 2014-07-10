@@ -1,5 +1,6 @@
 {
   "name": "brain-stash",
+  "version": "0.0.1",
   "main": "index.html",
   "window": {
     "toolbar": true,
@@ -7,6 +8,7 @@
   },
   "dependencies": {
     "marked": "^0.3.2",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "shelljs": "^0.3.0"
   }
 }

@@ -1,27 +1,38 @@
 {
   "name": "brain-stash",
-  "version": "0.0.1",
   "description": "An information management system similar to a wiki.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "nodewebkit app"
+  "version": "0.0.1",
+  "homepage": "https://github.com/lelandmiller/brain-stash",
+  "main": "app/index.html",
+  "author": {
+    "name": "Leland Miller",
+    "email": "lelandmiller@gmail.com",
+    "url": "http://www.lelandmiller.com"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/lelandmiller/brain-stash.git"
   },
+  "bugs": {
+    "url": "https://github.com/lelandmiller/brain-stash/issues"
+  },
+  "license": "GPLv3",
   "keywords": [
     "wiki",
     "notetaking",
     "documentation"
   ],
-  "author": "Leland Miller",
-  "license": "GPLv3",
-  "bugs": {
-    "url": "https://github.com/lelandmiller/brain-stash/issues"
+  "engines": {
+    "node": ">= 0.8.0"
   },
-  "homepage": "https://github.com/lelandmiller/brain-stash",
+  "scripts": {
+    "test": "grunt nodeunit",
+    "app": "nodewebkit app"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-node-webkit-builder": "^0.1.21"
+  },
   "dependencies": {
     "nodewebkit": "^0.9.2-7"
   }
